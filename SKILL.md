@@ -1,6 +1,6 @@
 ---
 name: ielts-prep
-description: "Coach IELTS preparation with diagnostic planning, section-specific drills, writing and speaking feedback, mock-test review, error tracking, and weekly study plans. Use when the agent needs to help with IELTS Listening, Reading, Writing, or Speaking practice; review essays or speaking answers; analyze mock performance; build a realistic study schedule; or turn repeated mistakes into targeted drills."
+description: "Coach IELTS preparation with diagnostic planning, goal-specific target analysis, user-profile adaptation, section-specific drills, writing and speaking feedback, mock-test review, error tracking, and weekly study plans. Use when the agent needs to help with IELTS Listening, Reading, Writing, or Speaking practice; review essays or speaking answers; analyze mock performance; map scores to university, immigration, or professional requirements; build a realistic study schedule; or turn repeated mistakes into targeted drills."
 metadata: {"openclaw":{"emoji":"🎯"}}
 ---
 
@@ -41,10 +41,12 @@ Prefer one high-leverage next step over a complete curriculum dump.
 
 Collect only what is needed:
 
+- Test type: Academic or General Training
 - Target band and test date
 - Current scores or self-estimate
 - Strongest and weakest modules
 - Available study time per day and per week
+- Purpose when relevant: university, immigration, or professional registration
 - A recent artifact when possible: essay, transcript, mock results, or wrong answers
 
 If key details are missing, assume:
@@ -52,6 +54,36 @@ If key details are missing, assume:
 - Exam window: 4 to 8 weeks
 - Study budget: 60 to 90 minutes per day
 - Main goal: improve the most tractable weak area first
+
+## Route by Goal and User Profile
+
+Before giving a plan, identify two things:
+
+- **User profile**: first-timer, retaker, busy professional, professional registration candidate, or plateaued repeat taker
+- **Goal type**: university admission, immigration pathway, professional registration, or general score improvement
+
+Use [references/user-profiles.md](references/user-profiles.md) to adjust:
+
+- question order
+- practice intensity
+- tone and pacing
+- whether to emphasize format knowledge, score recovery, or efficiency
+
+Use [references/targets-by-purpose.md](references/targets-by-purpose.md) when the user needs:
+
+- target score translation
+- minimum per-section requirements
+- immigration-oriented planning
+- advice on whether One Skill Retake is worth considering
+
+If official requirements matter, give a typical range and explicitly tell the user to verify the exact current requirement with the institution or authority.
+
+## Goal and Exam Guards
+
+- Confirm **Academic vs General Training** before planning Writing Task 1 work.
+- Distinguish **overall target** from **per-section minimums**.
+- Do not recommend aggressive full-test schedules for users whose main issue is one narrow bottleneck.
+- If one section alone blocks the user's outcome, consider whether a One Skill Retake style strategy is more efficient than full retest prep.
 
 ## OpenClaw Workspace Use
 
@@ -64,6 +96,21 @@ Recommended workspace files:
 - `.ielts/WEEKLY_REVIEW.md`
 
 If those files do not exist and the user wants an ongoing study system, create `.ielts/` in the active workspace and seed it from the bundled templates.
+
+For longer exam timelines, offer an **advanced tracking mode** using [references/tracking-system.md](references/tracking-system.md). This can include:
+
+- `.ielts/profile.md`
+- `.ielts/mocks/`
+- `.ielts/sessions/`
+- `.ielts/essays/`
+- `.ielts/speaking/`
+
+Seed the advanced mode from:
+
+- [assets/profile-template.md](assets/profile-template.md)
+- [assets/mock-review-template.md](assets/mock-review-template.md)
+- [assets/error-log-template.md](assets/error-log-template.md)
+- [assets/weekly-review-template.md](assets/weekly-review-template.md)
 
 ## Coaching Rules
 
@@ -109,6 +156,13 @@ For a one-week plan, default to:
 
 Read [references/templates.md](references/templates.md) when you need reusable output structures for study plans, reviews, or speaking/writing feedback.
 
+Adjust plan shape by profile:
+
+- **First-timer**: spend more effort on exam format and timing habits.
+- **Retaker**: spend more effort on repeated pattern diagnosis and narrow drills.
+- **Busy professional**: optimize for short weekday blocks and one heavier weekend checkpoint.
+- **Professional registration**: optimize for section minimums, especially Writing and Speaking consistency.
+
 ## Feedback Rules
 
 When reviewing user work:
@@ -144,6 +198,8 @@ If the user wants these files created, copy from:
 
 Promote a mistake into a rule when it appears at least three times or clearly represents a stable pattern.
 
+If the user is preparing over several weeks, or needs score evidence for a real deadline, offer the advanced tracking structure from [references/tracking-system.md](references/tracking-system.md) instead of keeping everything in a single weekly note.
+
 ## Recurring Error Handling
 
 If the same issue repeats:
@@ -177,6 +233,7 @@ Do not turn every answer into a full lesson. Stay close to the user's current bo
 
 Produce one of these when helpful:
 
+- A target-gap analysis
 - A 30-minute study block
 - A 7-day study plan
 - A Writing Task 1 or Task 2 review
@@ -185,4 +242,4 @@ Produce one of these when helpful:
 - A recurring-error log entry
 - A weekly reset review
 
-Use [references/templates.md](references/templates.md) for the response shapes.
+Use [references/templates.md](references/templates.md) for most response shapes, and [references/targets-by-purpose.md](references/targets-by-purpose.md) for target-gap analysis.
