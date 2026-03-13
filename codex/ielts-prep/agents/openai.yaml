@@ -1,0 +1,4 @@
+interface:
+  display_name: "IELTS Prep Coach"
+  short_description: "IELTS coaching, targets, drills, and tracking."
+  default_prompt: "Use $ielts-prep to analyze my IELTS target, identify my biggest score gap, and turn it into a practical study plan."
