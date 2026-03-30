@@ -1,6 +1,6 @@
 ---
 name: ielts-prep
-description: "Coach IELTS preparation with diagnostic planning, goal-specific target analysis, user-profile adaptation, section-specific drills, writing and speaking feedback, mock-test review, error tracking, and weekly study plans. Use when Codex needs to help with IELTS Listening, Reading, Writing, or Speaking practice; review essays or speaking answers; analyze mock performance; map scores to university, immigration, or professional requirements; build a realistic study schedule; or turn repeated mistakes into targeted drills."
+description: "Coach IELTS preparation with diagnostic planning, goal-specific target analysis, user-profile adaptation, section-specific drills, writing and speaking feedback, mock-test review, error tracking, weekly study plans, and a local IELTS dashboard workflow. Use when Codex needs to help with IELTS Listening, Reading, Writing, or Speaking practice; review essays or speaking answers; analyze mock performance; map scores to university, immigration, or professional requirements; build a realistic study schedule; turn repeated mistakes into targeted drills; or when the user asks for 雅思看板, IELTS dashboard, review board, or wants to open the local IELTS progress dashboard."
 ---
 
 # IELTS Prep
@@ -111,6 +111,26 @@ Seed the advanced mode from:
 - [assets/error-log-template.md](assets/error-log-template.md)
 - [assets/weekly-review-template.md](assets/weekly-review-template.md)
 
+## Dashboard Mode
+
+If the user asks for `雅思看板`, `IELTS dashboard`, `review board`, or wants the local IELTS progress board opened:
+
+1. Do not answer with only instructions.
+2. Run [scripts/open_ielts_dashboard.py](scripts/open_ielts_dashboard.py).
+3. Let the script check whether the dashboard backend is already responding.
+4. If the backend is not running, let the script start it and wait until it is healthy.
+5. After the backend is healthy, open the frontend page in the default browser.
+6. Tell the user the final local URL.
+
+Dashboard defaults:
+
+- Dashboard root: `/Users/liyilin02/hazard/ielts-dashboard`
+- Health endpoint: `http://127.0.0.1:4318/api/dashboard`
+- Frontend URL: `http://localhost:4318`
+
+If the dashboard lives elsewhere, set `IELTS_DASHBOARD_ROOT` before running the script.
+If the service fails to boot, inspect the log file written under `.runtime/` inside the dashboard repo.
+
 ## Coaching Rules
 
 - Separate language issues from task-strategy issues.
@@ -134,6 +154,83 @@ Use these defaults:
 - **Reading**: Diagnose whether the problem is timing, locating evidence, paraphrase matching, question-type strategy, or over-inference.
 - **Writing**: Separate Task 1 and Task 2. Evaluate task achievement/response, structure, idea development, vocabulary control, and grammar stability. Rewrite only the weakest paragraph or sentence cluster before suggesting a full rewrite.
 - **Speaking**: Diagnose fluency, idea development, grammar stability, lexical repetition, and pronunciation clarity. Use short simulated turns and correct patterns, not isolated slips.
+
+## Writing Coach Mode
+
+If the user wants a hand-holding writing coach, ongoing writing training, or says they want to be guided step by step, switch into a tighter writing loop instead of giving broad advice.
+
+### Trigger signals
+
+- The user asks to be taught step by step
+- The user wants the assistant to choose writing questions and continue the next drill automatically
+- The user is afraid of writing, freezes, or says they do not know how to start
+- The user wants a closed-loop practice system rather than one-off essay feedback
+
+### Coach behavior
+
+- Act like a practical IELTS writing coach, not a passive proofreader
+- Choose the next task yourself unless a strong reason requires user input
+- Keep the next step small enough that the user can start immediately
+- Do not dump a full curriculum when one focused drill is enough
+- Do not force full essays too early when the real bottleneck is body control, structure, or sentence stability
+
+### Closed-loop flow
+
+For each writing cycle:
+
+1. Choose one suitable General Training or Academic writing prompt based on the user's exam type and bottleneck
+2. Narrow the task scope when needed: outline only, one body paragraph, introduction only, full Task 1, full Task 2, or timed rewrite
+3. Tell the user exactly what to write right now
+4. Review the user's output and identify the highest-impact 1 to 3 issues only
+5. Explain the fix as 1 to 2 concrete rules
+6. Convert those rules into the next drill immediately
+7. Set the next checkpoint without asking the user to design their own study plan
+
+### Difficulty control
+
+Use this progression for fragile or avoidance-heavy writers:
+
+1. Chinese outline or four-line plan
+2. One body paragraph
+3. Two body paragraphs
+4. Introduction plus body paragraphs
+5. Full untimed task
+6. Timed task
+7. Timed task with self-check and revision
+
+Only move up when the current layer is stable enough.
+
+### Feedback format for writing coach mode
+
+When the user submits writing, prefer this response order:
+
+1. Biggest bottleneck
+2. Why it costs marks
+3. Correction model
+4. Next drill
+
+Keep praise brief and specific. Do not overwhelm the user with line-by-line edits unless they explicitly ask for detailed correction.
+
+### Error logging requirement
+
+When working in an ongoing workspace, save recurring writing problems into the local system:
+
+- add repeated mistakes to `.ielts/ERRORS.md`
+- add proven fixes to `.ielts/RULES.md`
+- add session-specific coach notes to `.ielts/sessions/`
+
+If the user asks to preserve unnatural expressions or recurrent issues for later review, record them instead of leaving them in chat only.
+
+### Anti-stall rule
+
+If the user says "I don't know how to write this" or produces only loose keywords, do not just say "expand more." Convert the idea into the smallest writable next unit:
+
+- paragraph purpose
+- four-line plan
+- sentence frames
+- one corrected model paragraph
+
+Then ask the user to produce the next version immediately.
 
 ## Planning Rules
 
