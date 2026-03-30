@@ -27,3 +27,22 @@ ln -s ~/ielts-prep-skill/openclaw/ielts-prep ~/.openclaw/skills/ielts-prep
   - Codex skill with `agents/openai.yaml`
 - `openclaw/ielts-prep/`
   - OpenClaw skill with ClawHub-compatible metadata in `SKILL.md`
+
+## Audio Companion Stack
+
+This repository focuses on coaching and planning, but the current audio workflow depends on companion skills:
+
+- `ielts-audio-analysis`
+- `ielts-audio-director`
+- `video-skills`
+
+The companion audio stack now supports:
+
+- English IELTS speaking and listening review
+- Japanese study-audio review
+- Local Japanese ASR comparison through:
+  - `ja-kotoba`
+  - `ja-whisper-large-v3`
+  - `ja-reazonspeech`
+
+When the task is mainly audio routing or model choice, route to `ielts-audio-director` first, then return to `ielts-prep` for study planning or drill follow-up.

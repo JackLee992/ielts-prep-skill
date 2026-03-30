@@ -144,6 +144,18 @@ If the service fails to boot, inspect the log file written under `.runtime/` ins
   - `When to re-test`
 - Prefer focused practice sets over full mocks unless the test is within two weeks or the user explicitly asks for a mock.
 
+## Audio Companion Guidance
+
+When the user brings local audio files, voice memos, or wants speaking/listening artifacts reviewed, prefer the companion audio stack instead of forcing `ielts-prep` to do raw ASR work itself.
+
+Use this handoff:
+
+- `ielts-audio-director` for language routing and model choice
+- `ielts-audio-analysis` for transcript-driven diagnosis
+- `video-skills` for the shared local transcription stack and Japanese model benchmark
+
+If the user is working in Japanese rather than IELTS English, avoid fake IELTS band claims and switch to study-oriented feedback after the audio analysis returns.
+
 ## Section-Specific Guidance
 
 Apply section workflows based on the user's bottleneck. Read [references/module-workflows.md](references/module-workflows.md) when you need detailed drill design or section-level diagnosis.
